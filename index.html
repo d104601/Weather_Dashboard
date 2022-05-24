@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Weather Dashboard</title>
+    </head>
+    <body>
+        <header>
+            <h1>Weather Dashboard</h1>
+        </header>
+        <main class="flex-row justify-space-between">
+            <!-- Section for input -->
+            <section class="col-12 col-md-4">
+                <div class="card">
+                    <form>
+                        <div class="col-12 col-md-4">
+                            <label class="form-label">Search for a City:</label>
+                            <input id="city" type="text" autofocus="true" class="form-input">
+                            <button type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <div id="history" class="card-body">
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section to display results -->
+            <section class="col-12 col-md-8">
+                <!-- Today's forcast -->
+                <div></div>
+                <!-- 5-Day Forecast -->
+                <div></div>
+            </section>
+        </main>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
