@@ -46,7 +46,18 @@ function getResult(city) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            displayResult(data);
+            displayToday(data);
+          });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      });
+    
+    var forcastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+ city + '&units=imperial&appid=' + apiKey;
+    fetch(forcastUrl).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            displayFuture(data);
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -55,8 +66,7 @@ function getResult(city) {
 }
 
 // function to display data from api
-function displayResult(data) {
-    console.log(data);
+function displayToday(data) {
     todayEl.textContent = "";
     futureEl.textContent = "";
 
@@ -83,6 +93,7 @@ function displayResult(data) {
     getUV(data.coord.lat, data.coord.lon);
 }
 
+// function to find and display UV data
 function getUV(lat, lon) {
     const apiKey = '95827148da73fc51bf98de54195cc14e';
     var apiUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
@@ -109,6 +120,46 @@ function getUV(lat, lon) {
           return 'Error: ' + response.statusText;
         }
       });    
+}
+
+// function to display future 5 days' data
+function displayFuture(data) {
+    console.log(data);
+
+    var title = document.querySelector("#futureTitle");
+    title.textContent = "5-Days Forecast";
+    futureEl.appendChild(title);
+    for(let i = 0; i < 5; i++)
+    {
+        var curr = data.list[i];
+        var forecastCard = document.createElement("div");
+        forecastCard.setAttribute("class", "card bg-info text-white m-2")
+
+        var date = document.createElement("h4");
+        var icon = document.createElement("h4");
+        var iconimg = document.createElement("img");
+        var temperature = document.createElement("h4");
+        var humidity = document.createElement("h4");
+
+        date.setAttribute("class", "card-header text-center");
+        icon.setAttribute("class", "card-body text-center");
+        iconimg.setAttribute("src", "https://openweathermap.org/img/wn/" + curr.weather[0].icon + "@2x.png");
+        temperature.setAttribute("class", "card-body text-center");
+        humidity.setAttribute("class", "card-body text-center");
+
+        icon.appendChild(iconimg);
+
+        date.textContent = moment.unix(curr.dt).format("MMM Do, YYYY");
+        temperature.textContent = curr.main.temp + " °F";
+        humidity.textContent = curr.main.humidity + " %";
+
+        forecastCard.appendChild(date);
+        forecastCard.appendChild(icon);
+        forecastCard.appendChild(temperature);
+        forecastCard.appendChild(humidity);
+
+        futureEl.appendChild(forecastCard);
+    }
 }
 
 // function to add search history as clicking search button
