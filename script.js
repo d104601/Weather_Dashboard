@@ -41,7 +41,7 @@ var historyButton = function(event) {
 // function to get search result as city name
 function getResult(city) {
     const apiKey = '95827148da73fc51bf98de54195cc14e';
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q='+ city + '&appid=' + apiKey;
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q='+ city + '&units=imperial&appid=' + apiKey;
 
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
@@ -54,6 +54,7 @@ function getResult(city) {
       });
 }
 
+// function to display data from api
 function displayResult(data) {
     console.log(data);
     todayEl.textContent = "";
@@ -66,19 +67,48 @@ function displayResult(data) {
     var humidity = document.createElement("h3");
     var wind = document.createElement("h3");
 
-    location.textContent = data.name;
-    currentDate.textContent = moment(data.dt.value).format("MMM Do, YYYY");
+    location.textContent = data.name + "(" + moment(data.dt.value).format("MMM Do, YYYY") + ")";
     icon.setAttribute("src", "https://openweathermap.org/img/wn/" + data.weather[0].icon+ "@2x.png");
-    temperature.textContent = "Temperature: " + data.main.temp + " °F";
+    temperature.textContent = "Temp: " + data.main.temp + " °F";
+    wind.textContent = "Wind: " + data.wind.speed + " MPH";
     humidity.textContent = "Humidity: " + data.main.humidity + " %";
-    wind.textContent = "Wind Speed: " + data.wind.speed + " MPH";
+
 
     location.appendChild(icon);
     todayEl.appendChild(location);
     todayEl.appendChild(currentDate);
     todayEl.appendChild(temperature);
+    todayEl.appendChild(wind);
     todayEl.appendChild(humidity);
+    getUV(data.coord.lat, data.coord.lon);
+}
 
+function getUV(lat, lon) {
+    const apiKey = '95827148da73fc51bf98de54195cc14e';
+    var apiUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
+    
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            var uv = document.createElement("h3");
+            var uvValue = document.createElement("span");
+            uvValue.textContent = data.value;
+            if(data.value < 2)
+            {
+                uvValue.setAttribute("class", "bg-success text-white");
+            }
+            else if(data.value > 8)
+            {
+                uvValue.setAttribute("class", "bg-danger text-white");
+            }
+            uv.textContent = "UV index: ";
+            uv.appendChild(uvValue);
+            todayEl.appendChild(uv);
+          });
+        } else {
+          return 'Error: ' + response.statusText;
+        }
+      });    
 }
 
 // function to add search history as clicking search button
