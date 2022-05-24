@@ -18,7 +18,7 @@ No additional installation required. Click the link in "Deployed Website" below 
 https://d104601.github.io/Weather_Dashboard/
 
 ## Sample Application Screenshot
-
+![sample](https://github.com/d104601/Weather_Dashboard/blob/main/screenshot.jpg)
 
 ## Credits
 
