@@ -9,16 +9,16 @@
         <link rel="stylesheet" href="style.css" />
         <title>Weather Dashboard</title>
     </head>
-    <body>
+    <body class="flex-column min-100-vh">
         <header>
             <h1>Weather Dashboard</h1>
         </header>
         <main class="flex-row justify-space-between">
             <!-- Section for input -->
-            <section class="col-12 col-md-4">
+            <section class="col-12 col-md-3">
                 <div class="card">
                     <form id="cityForm" class="card-body">
-                        <label class="form-label">Search for a City:</label>
+                        <label class="form-label"><h2>Search for a City:</h2></label>
                         <input id="city" type="text" autofocus="true" class="form-input">
                         <button type="submit" class="btn btn-primary btn-block">Search</button>
                     </form>
@@ -32,15 +32,16 @@
             </section>
 
             <!-- Section to display results -->
-            <section class="col-12 col-md-8">
+            <section class="col-12 col-md-9">
                 <!-- Today's forcast -->
-                <div></div>
+                <div id="today" class="card"></div>
                 <!-- 5-Day Forecast -->
-                <div></div>
+                <div id="future" class="card"></div>
             </section>
         </main>
 
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

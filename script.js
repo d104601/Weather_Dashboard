@@ -2,6 +2,8 @@ var cities = [];
 var cityFormEl = document.querySelector('#cityForm');
 var historyEl = document.querySelector('#history');
 var inputEl = document.querySelector('#city');
+var todayEl = document.querySelector('#today');
+var futureEl = document.querySelector('#future');
 
 var submitButton = function(event) {
     event.preventDefault();
@@ -29,9 +31,10 @@ var submitButton = function(event) {
 }
 
 var historyButton = function(event) {
-    event.preventDefault();
-
-
+    var city = event.target.getAttribute("name");
+    if(city){
+        getResult(city);
+    }
 }
 
 
@@ -53,6 +56,29 @@ function getResult(city) {
 
 function displayResult(data) {
     console.log(data);
+    todayEl.textContent = "";
+    futureEl.textContent = "";
+
+    var location = document.createElement("h1");
+    var currentDate = document.createElement("h2");
+    var icon = document.createElement("img");
+    var temperature = document.createElement("h3");
+    var humidity = document.createElement("h3");
+    var wind = document.createElement("h3");
+
+    location.textContent = data.name;
+    currentDate.textContent = moment(data.dt.value).format("MMM Do, YYYY");
+    icon.setAttribute("src", "https://openweathermap.org/img/wn/" + data.weather[0].icon+ "@2x.png");
+    temperature.textContent = "Temperature: " + data.main.temp + " °F";
+    humidity.textContent = "Humidity: " + data.main.humidity + " %";
+    wind.textContent = "Wind Speed: " + data.wind.speed + " MPH";
+
+    location.appendChild(icon);
+    todayEl.appendChild(location);
+    todayEl.appendChild(currentDate);
+    todayEl.appendChild(temperature);
+    todayEl.appendChild(humidity);
+
 }
 
 // function to add search history as clicking search button
