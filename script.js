@@ -124,8 +124,6 @@ function getUV(lat, lon) {
 
 // function to display future 5 days' data
 function displayFuture(data) {
-    console.log(data);
-
     var title = document.querySelector("#futureTitle");
     title.textContent = "5-Days Forecast";
     futureEl.appendChild(title);
