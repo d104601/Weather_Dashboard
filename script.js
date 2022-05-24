@@ -129,7 +129,7 @@ function displayFuture(data) {
     var title = document.querySelector("#futureTitle");
     title.textContent = "5-Days Forecast";
     futureEl.appendChild(title);
-    for(let i = 0; i < 5; i++)
+    for(let i = 5; i < data.list.length; i += 8)
     {
         var curr = data.list[i];
         var forecastCard = document.createElement("div");
