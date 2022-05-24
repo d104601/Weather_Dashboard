@@ -6,12 +6,12 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="style.css">
         <title>Weather Dashboard</title>
     </head>
     <body class="flex-column min-100-vh">
         <header>
-            <h1>Weather Dashboard</h1>
+            <h1 class="bg-primary text-white text-center p-3">Weather Dashboard</h1>
         </header>
         <main class="flex-row justify-space-between row">
             <!-- Section for input -->
@@ -19,7 +19,7 @@
                 <div class="card">
                     <form id="cityForm" class="card-body">
                         <label class="form-label"><h2>Search for a City:</h2></label>
-                        <input id="city" type="text" autofocus="true" class="form-input">
+                        <input id="city" type="text" autofocus="true" class="form-control">
                         <button type="submit" class="btn btn-primary btn-block">Search</button>
                     </form>
                 </div>
@@ -32,12 +32,14 @@
             </section>
 
             <!-- Section to display results -->
-            <section class="col-12 col-md-8">
+            <section class="card col-12 col-md-8">
                 <!-- Today's forcast -->
-                <div id="today" class="card"></div>
+                <div id="today" class="card-body"></div>
                 <!-- 5-Day Forecast -->
-                <h2 id="futureTitle" class="col-12"></h2>
-                <div id="future" class="row"></div>
+                <div class="card-body">
+                    <h2 id="futureTitle" class="col-12"></h2>
+                    <div id="future" class="row"></div>
+                </div>
             </section>
         </main>
 
